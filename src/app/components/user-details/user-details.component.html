@@ -1,0 +1,65 @@
+<div class="max-w-xl mx-auto my-8 p-6 border rounded-lg shadow-lg">
+  <h2 class="text-2xl font-bold mb-4">User Details:</h2>
+  <p class="mb-2">
+    First Name: <span class="font-medium">{{ user.first_name }}</span>
+  </p>
+  <p class="mb-2">
+    Last Name: <span class="font-medium">{{ user.last_name }}</span>
+  </p>
+  <p class="mb-2">
+    Username: <span class="font-medium">{{ user.username }}</span>
+  </p>
+  <p class="mb-2">
+    Email: <span class="font-medium">{{ user.email }}</span>
+  </p>
+
+  <p class="mb-2">
+    Weight: <span class="font-medium">{{ user.weight }}</span>
+    <i
+      (click)="showUpdateWeight = true"
+      class="fas fa-pencil-alt cursor-pointer"
+    ></i>
+  </p>
+  <app-update-weight
+    *ngIf="showUpdateWeight"
+    [currentWeight]="user.weight"
+    (weightUpdated)="updateWeight($event)"
+    class="mb-4"
+  ></app-update-weight>
+  <ng-template #weightInput>
+    <input
+      type="number"
+      [(ngModel)]="user.weight"
+      placeholder="Enter weight"
+      class="mt-1 p-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full"
+    />
+    <button
+      (click)="submitWeight()"
+      class="mt-2 p-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700"
+    >
+      Submit Weight
+    </button>
+  </ng-template>
+
+  <div *ngIf="user.gender; else genderInput" class="mb-4">
+    <p>
+      Gender: <span class="font-medium">{{ user.gender }}</span>
+    </p>
+  </div>
+  <ng-template #genderInput>
+    <select
+      [(ngModel)]="user.gender"
+      class="mt-1 block w-full p-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+    >
+      <option value="" disabled>Select gender</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+    </select>
+    <button
+      (click)="submitGender()"
+      class="mt-2 p-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700"
+    >
+      Submit Gender
+    </button>
+  </ng-template>
+</div>

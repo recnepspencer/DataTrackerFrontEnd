@@ -1,0 +1,93 @@
+<div class="max-w-4xl mx-auto p-8">
+  <h2 class="text-2xl font-bold mb-6">Report Sleep</h2>
+  <form (submit)="reportSleep()" class="mb-8">
+    <div class="mb-4">
+      <label for="sleep_time" class="block text-sm font-medium text-gray-700"
+        >Time went to bed:</label
+      >
+      <input
+        type="datetime-local"
+        id="sleepTime"
+        [(ngModel)]="sleepData.startTime"
+        name="sleep_time"
+        required
+        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+      />
+    </div>
+
+    <div class="mb-4">
+      <label for="awake_time" class="block text-sm font-medium text-gray-700"
+        >Time woke up:</label
+      >
+      <input
+        type="datetime-local"
+        id="awakeTime"
+        [(ngModel)]="sleepData.endTime"
+        name="awake_time"
+        required
+        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+      />
+    </div>
+
+    <div class="mb-6">
+      <label for="sleep_quality" class="block text-sm font-medium text-gray-700"
+        >Sleep Quality (1-10):</label
+      >
+      <input
+        type="number"
+        id="sleepQuality"
+        [(ngModel)]="sleepData.quality"
+        name="sleep_quality"
+        min="1"
+        max="10"
+        required
+        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+      />
+    </div>
+
+    <button
+      type="submit"
+      class="px-4 py-2 bg-orange-500 text-white font-medium rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50"
+    >
+      Submit
+    </button>
+  </form>
+
+  <button
+    (click)="loadSleepHistory()"
+    class="px-4 py-2 bg-yellow-500 text-white font-medium rounded hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50"
+  >
+    Load Sleep History
+  </button>
+</div>
+
+<div
+  class="max-w-4xl mx-auto p-8"
+  *ngFor="let record of sleepHistory; let i = index"
+>
+  <div class="bg-white rounded-lg shadow-lg p-4 mb-4">
+    <p class="font-medium">
+      Date:
+      <span class="text-sm font-normal"
+        >{{ record.sleep_time | date : "short" }} -
+        {{ record.awake_time | date : "short" }}</span
+      >
+    </p>
+    <p class="font-medium">
+      Quality:
+      <span class="text-sm font-normal">{{ record.sleep_quality }}</span>
+    </p>
+    <button
+      (click)="editSleepRecord(record.id)"
+      class="px-3 py-1 text-xs bg-yellow-500 text-white rounded hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+    >
+      Edit
+    </button>
+    <button
+      (click)="deleteSleepRecord(record.id)"
+      class="px-3 py-1 text-xs bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 ml-2"
+    >
+      Delete
+    </button>
+  </div>
+</div>

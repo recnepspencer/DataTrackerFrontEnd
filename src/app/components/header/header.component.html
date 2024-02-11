@@ -1,0 +1,23 @@
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-3 col-3">
+                <div class="logo">
+                    <label class="bg-black text-white text-4xl p-2 rounded-md italic ">Tracker</label>
+                </div>
+            </div>
+            <div class="col-md-9 col-sm-9 col-9 text-end">
+                <div class="menu-icon" (click)="openMenu()">
+                    <i class="{{menu_icon}}"></i>
+                </div>
+                <div class="desktop_menu" [class.mobile_menu]="menuValue">
+                    <ul>
+                        <li (click)="navigateToDashboard()" routerLink="/dashboard">Dashboard</li>
+                        <li (click)="navigateToUserDetails()" routerLink="/user-details">User Details</li>
+                        <li (click)="navigateToLogin()" routerLink="/login">Log in</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

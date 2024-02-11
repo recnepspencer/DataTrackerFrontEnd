@@ -1,0 +1,27 @@
+<div>
+    <h2>Register</h2>
+    <form (ngSubmit)="onSubmit()">
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" [(ngModel)]="registrationData.first_name" name="first_name" required>
+  
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" [(ngModel)]="registrationData.last_name" name="last_name" required>
+
+        <label for="email">Email:</label>
+        <input type="text" id="email" [(ngModel)]="registrationData.email" name="email" required>
+    
+
+      <label for="username">Username:</label>
+      <input type="text" id="username" [(ngModel)]="registrationData.username" name="username" required>
+  
+      <label for="password">Password:</label>
+      <input type="password" id="password" [(ngModel)]="registrationData.password" name="password" required>
+  
+      <button type="submit" [disabled]="isLoading">Register</button>
+    </form>
+  
+    <div *ngIf="errorMessage" class="error">
+      {{ errorMessage }}
+    </div>
+  </div>
+  
