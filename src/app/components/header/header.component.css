@@ -1,6 +1,6 @@
 header {
     padding: 10px;
-    background: #c00000;
+    background: #DD3439;
   }
   .logo {
     width: 90px;
@@ -19,27 +19,27 @@ header {
     list-style-type: none;
     color: white;
     display: inline-block;
-    font-size: 18px;
+    font-size: 20px;
     margin-left: 26px;
+    font-weight: 700;
+    margin-bottom: 10px;
   }
   .desktop_menu ul li:hover {
-    font-size: 19px;
-    font-weight: bold;
     cursor: pointer;
-    color: black;
-    transition: 0.3s ease-in-out;
+    color: #453A3A;
+    transition: 0.2s ease-in-out;
   }
   .menu-icon {
     display: none;
   }
-  
+
   @media screen and (min-width: 128px) and (max-width: 900px) {
     .desktop_menu {
       position: fixed !important;
       right: -280px;
       transition: 0.4s ease-in-out;
       top: 64px;
-      background: #c00000;
+      background: #3E5969;
       width: 280px;
       height: 100%;
     }

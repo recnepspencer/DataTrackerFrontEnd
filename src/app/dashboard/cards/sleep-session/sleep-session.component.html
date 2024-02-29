@@ -1,17 +1,17 @@
 <div>
-  <button *ngIf="!isSleeping" (click)="startSleeping()" class="px-4 py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
-      Start Sleeping
+  <button *ngIf="!isSleeping" style="background-color: #272E33" (click)="onStartSleeping()" class="mb-4 inline-block px-6 py-2 text-sm font-medium leading-6 text-center text-white uppercase transition bg-red-500 rounded-full shadow ripple hover:shadow-lg hover:bg-red-600 focus:outline-none">
+      Start Sleep
   </button>
   <div *ngIf="isSleeping">
-      <button (click)="showSleepQualityInput()" class="px-4 py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
-          Stop Sleeping
+      <button (click)="onStopSleeping()" style="background-color: #c9c730"class="mb-4 inline-block px-6 py-2 text-sm font-medium leading-6 text-center text-white uppercase transition bg-red-500 rounded-full shadow ripple hover:shadow-lg hover:bg-red-600 focus:outline-none">
+          Stop Sleep
       </button>
   </div>
 
   <div *ngIf="showSleepQuality" class="mt-4">
       <label for="sleepQuality" class="block text-sm font-medium text-gray-700">Sleep Quality (1-10):</label>
       <input type="number" id="sleepQuality" [(ngModel)]="sleepQuality" min="1" max="10" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-      <button (click)="stopSleeping()" class="mt-4 px-4 py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
+      <button (click)="onSubmit()"  style="background-color: #35A0DE" class="mt-4 px-4 py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
           Submit
       </button>
   </div>

@@ -1,4 +1,4 @@
-<div class="max-w-xl mx-auto my-8 p-6 border rounded-lg shadow-lg">
+<div  style="position: relative; width: 40%; margin-left: 15px; margin-top: 15px;" class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
   <h2 class="text-2xl font-bold mb-4">User Details:</h2>
   <p class="mb-2">
     First Name: <span class="font-medium">{{ user.first_name }}</span>
@@ -15,28 +15,21 @@
 
   <p class="mb-2">
     Weight: <span class="font-medium">{{ user.weight }}</span>
-    <i
-      (click)="showUpdateWeight = true"
-      class="fas fa-pencil-alt cursor-pointer"
-    ></i>
+    <i (click)="showUpdateWeightDialog()"
+      class="fas fa-pencil-alt cursor-pointer">
+    </i>
   </p>
   <app-update-weight
     *ngIf="showUpdateWeight"
     [currentWeight]="user.weight"
-    (weightUpdated)="updateWeight($event)"
-    class="mb-4"
-  ></app-update-weight>
+    [user]="user"
+    class="mb-4">
+  </app-update-weight>
   <ng-template #weightInput>
-    <input
-      type="number"
-      [(ngModel)]="user.weight"
-      placeholder="Enter weight"
-      class="mt-1 p-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full"
-    />
-    <button
-      (click)="submitWeight()"
-      class="mt-2 p-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700"
-    >
+    <input type="number" [(ngModel)]="user.weight" placeholder="Enter weight"
+      class="mt-1 p-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full"/>
+
+    <button (click)="onSubmitWeight()" class="mt-2 p-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700">
       Submit Weight
     </button>
   </ng-template>
@@ -47,19 +40,21 @@
     </p>
   </div>
   <ng-template #genderInput>
-    <select
-      [(ngModel)]="user.gender"
-      class="mt-1 block w-full p-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-    >
-      <option value="" disabled>Select gender</option>
-      <option value="Male">Male</option>
-      <option value="Female">Female</option>
-    </select>
-    <button
-      (click)="submitGender()"
-      class="mt-2 p-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700"
-    >
-      Submit Gender
-    </button>
+    <div style="display: flex; align-items: center;">
+      <label for="">Gender:</label>
+      <select [(ngModel)]="user.gender" style="height: 30px; width: 100px; border: 1px solid #95adbc; border-radius: 5px; margin-left: 5px;">
+        <option value="" disabled>Select gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+    </div>
+    <div style="display: flex; justify-content: end">
+      <button
+      (click)="onSubmitGender()"
+      class="text-white font-semibold rounded-md shadow-md hover:bg-blue-500"
+      style="background-color: #35A0DE; padding: 5px 7px;margin-top: 10px;">
+      Submit
+      </button>
+    </div>
   </ng-template>
 </div>

@@ -1,6 +1,13 @@
-<div class="overlay">
+<div class="overlay" style="padding: 35px;">
     <div class="weight-update-form">
-      <input type="number" [(ngModel)]="newWeight" placeholder="Enter new weight">
-      <button (click)="submitWeight()">Update Weight</button>
+      <div style="display: flex; flex-direction: column;">
+        <label style="font-size: 24px; font-weight: 600; margin-bottom: 10px;">Weight</label>
+        <input type="number" [(ngModel)]="newWeight" placeholder="Enter new weight" style="padding-left: 3px; height: 30px; border: 1px solid rgb(186, 186, 186); outline: none; border-radius: 5px;">
+      </div>
+      <div style="display: flex; justify-content: end; margin-top: 20px;">
+        <button style="background-color: #87A4B6;" (click)="onCancel()">Cancel</button>
+        <button (click)="onSubmitWeight()" style="margin-left: 8px;">Update</button>
+      </div>
+
     </div>
-  </div>
+</div>
