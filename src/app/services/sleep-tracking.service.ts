@@ -1,36 +1,47 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { CrudService } from './crud.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SleepTrackingService {
-  private apiUrl = 'http://localhost:8000/api';
-  constructor(private http: HttpClient) { }
+  constructor(private crudService: CrudService) { }
 
-  reportSleep(sleepData: { startTime: Date, endTime: Date, quality: number }): Observable<any> {
-    const formatDateTime = (date: Date) => 
-    date.toISOString().replace(/\.\d{3}Z$/, ''); // Remove milliseconds and 'Z'
+  private uri = 'sleep-tracking';
 
-  const dataToSend = {
-    sleep_time: formatDateTime(sleepData.startTime),
-    awake_time: formatDateTime(sleepData.endTime),
-    sleep_quality: sleepData.quality
-  };
-    console.log('Sending sleep data:', dataToSend);
-    return this.http.post(`${this.apiUrl}/sleep-tracking`, dataToSend);
+  createSleepRecord(sleepData: { sleepStartTime: Date, sleepEndTime: Date, sleepQuality: number }): Observable<any> {
+
+    const dataToSend = this.makeSleepRecordObject(sleepData);
+
+    return this.crudService.create(dataToSend, this.uri);
   }
 
-  getSleepHistory(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/sleep-tracking`);
+  readSleepRecords(): Observable<any> {
+    return this.crudService.index(this.uri);
+  }
+
+  showSleepRecord(id: number): Observable<any> {
+    return this.crudService.show(id, this.uri);
   }
 
   updateSleepRecord(id: number, data: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/sleep-tracking/${id}`, data);
+    return this.crudService.update(id, data, this.uri);
   }
 
   deleteSleepRecord(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/sleep-tracking/${id}`);
+    return this.crudService.delete(id, this.uri);
+  }
+
+  makeSleepRecordObject(sleepData: { sleepStartTime: Date, sleepEndTime: Date, sleepQuality: number }) {
+    return {
+      sleep_time: this.formatDateTime(sleepData.sleepStartTime),
+      awake_time: this.formatDateTime(sleepData.sleepEndTime),
+      sleep_quality: sleepData.sleepQuality
+    };
+  }
+
+  formatDateTime(date: Date) {
+    return date.toISOString().replace(/\.\d{3}Z$/, ''); // Remove milliseconds and 'Z'
   }
 }

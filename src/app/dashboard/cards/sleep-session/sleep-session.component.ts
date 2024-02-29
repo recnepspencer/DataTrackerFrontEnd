@@ -10,30 +10,48 @@ import { FormsModule } from '@angular/forms';
 })
 
 export class SleepSessionComponent {
-  isSleeping = false;
-  showSleepQuality = false;
+  @Output() sessionEnded = new EventEmitter<{ sleepStartTime: Date, sleepEndTime: Date, sleepQuality: number }>();
+
+  private sleepStartTime: Date | undefined = undefined;
+
+  isSleeping: boolean = false;
+  showSleepQuality: boolean = false;
+
   sleepQuality: number = 1;
-  private sleepStart?: Date; // Store start time locally
 
-  @Output() sessionEnded = new EventEmitter<{ startTime: Date, endTime: Date, quality: number }>();
-
-  startSleeping(): void {
-    this.isSleeping = true;
-    this.showSleepQuality = false;
-    this.sleepStart = new Date(); // Capture and store start time
+  onStartSleeping(): void {
+    this.toggleIsSleeping(true);
+    this.toggleSleepQualityInput(false);
+    this.setSleepStartTime();
   }
 
-  showSleepQualityInput(): void {
-    this.isSleeping = false;
-    this.showSleepQuality = true;
+  onStopSleeping(): void {
+    this.toggleIsSleeping(false);
+    this.toggleSleepQualityInput(true);
   }
 
-  stopSleeping(): void {
-    if (this.sleepStart) {
+  onSubmit(): void {
+    this.submitSleepData();
+  }
+
+  setSleepStartTime(): void {
+    this.sleepStartTime = new Date();
+  }
+
+  toggleSleepQualityInput(showSleepQuality: boolean): void {
+    this.showSleepQuality = showSleepQuality;
+  }
+
+  toggleIsSleeping(isSleeping: boolean): void {
+    this.isSleeping = isSleeping;
+  }
+
+  submitSleepData(): void {
+    if (this.sleepStartTime) {
       const endTime = new Date();
-      this.sessionEnded.emit({ startTime: this.sleepStart, endTime: endTime, quality: this.sleepQuality });
+      this.sessionEnded.emit({ sleepStartTime: this.sleepStartTime, sleepEndTime: endTime, sleepQuality: this.sleepQuality });
     }
-    this.showSleepQuality = false;
-    this.sleepStart = undefined; // Reset start time for next session
+    this.toggleSleepQualityInput(false);
+    this.sleepStartTime = undefined; // Reset start time for next session
   }
 }

@@ -9,18 +9,20 @@ import { RouterLink, RouterOutlet, Router } from '@angular/router';
 })
 export class HeaderComponent {
 
-  constructor(private router: Router) { 
+  constructor(private router: Router) {
   }
 
- menuValue:boolean=false;
- menu_icon :string ='bi bi-list';
- openMenu(){
+  menuValue:boolean=false;
+  menu_icon :string ='bi bi-list';
+
+  openMenu(){
     this.menuValue =! this.menuValue ;
     this.menu_icon = this.menuValue ? 'bi bi-x' : 'bi bi-list';
   }
-   closeMenu() {
-    this.menuValue = false;
-    this.menu_icon = 'bi bi-list';
+
+  closeMenu() {
+  this.menuValue = false;
+  this.menu_icon = 'bi bi-list';
   }
 
   navigateToDashboard(){
@@ -37,7 +39,4 @@ export class HeaderComponent {
     this.router.navigate(['/login']);
     this.closeMenu()
   }
-  
-
-
 }

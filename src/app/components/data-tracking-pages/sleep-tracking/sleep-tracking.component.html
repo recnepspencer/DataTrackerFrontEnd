@@ -1,6 +1,6 @@
 <div class="max-w-4xl mx-auto p-8">
   <h2 class="text-2xl font-bold mb-6">Report Sleep</h2>
-  <form (submit)="reportSleep()" class="mb-8">
+  <form (submit)="onSubmit()" class="mb-8">
     <div class="mb-4">
       <label for="sleep_time" class="block text-sm font-medium text-gray-700"
         >Time went to bed:</label
@@ -8,7 +8,7 @@
       <input
         type="datetime-local"
         id="sleepTime"
-        [(ngModel)]="sleepData.startTime"
+        [(ngModel)]="sleepData.sleepStartTime"
         name="sleep_time"
         required
         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
@@ -22,7 +22,7 @@
       <input
         type="datetime-local"
         id="awakeTime"
-        [(ngModel)]="sleepData.endTime"
+        [(ngModel)]="sleepData.sleepEndTime"
         name="awake_time"
         required
         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
@@ -36,7 +36,7 @@
       <input
         type="number"
         id="sleepQuality"
-        [(ngModel)]="sleepData.quality"
+        [(ngModel)]="sleepData.sleepQuality"
         name="sleep_quality"
         min="1"
         max="10"
@@ -45,20 +45,23 @@
       />
     </div>
 
-    <button
-      type="submit"
-      class="px-4 py-2 bg-orange-500 text-white font-medium rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50"
-    >
-      Submit
-    </button>
+    <div style="display: flex; align-items: end; justify-content: space-between;">
+      <button
+        (click)="loadSleepHistory()"
+        style="background-color: #c9c730;"
+        class="px-4 py-2 bg-yellow-500 text-white font-medium rounded hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50">
+        Load Sleep History
+      </button>
+      <button
+        type="submit"
+        style="background-color: #35A0DE"
+        class="px-4 py-2 bg-orange-500 text-white font-medium rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50">
+        Submit
+      </button>
+    </div>
   </form>
 
-  <button
-    (click)="loadSleepHistory()"
-    class="px-4 py-2 bg-yellow-500 text-white font-medium rounded hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50"
-  >
-    Load Sleep History
-  </button>
+
 </div>
 
 <div
