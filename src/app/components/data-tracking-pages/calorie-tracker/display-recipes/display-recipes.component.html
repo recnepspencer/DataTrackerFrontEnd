@@ -1,0 +1,11 @@
+<div *ngIf="recipes.length > 0; else noRecipesTemplate">
+  <div *ngFor="let recipe of recipes">
+    <app-recipe-card [recipe]="recipe" (deleteRequest)="onDeleteRequest($event)"></app-recipe-card>
+  </div>
+</div>
+
+<ng-template #noRecipesTemplate>
+  <div class="text-center py-4">
+    <p>You don't have any recipes yet.</p>
+  </div>
+</ng-template>

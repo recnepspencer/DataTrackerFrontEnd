@@ -1,0 +1,77 @@
+<!-- calorie-tracker.component.html -->
+<div class="container mx-auto p-4">
+    <!-- Recipe Name Input -->
+    <div class="mb-4 flex flex-col">
+      <label class="block text-gray-700 text-sm font-bold mb-2">Type Recipe Name:</label>
+      <input type="text" [(ngModel)]="recipeName" name="recipeName" class="shadow appearance-none border rounded w-6/12 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+      <label>How many servings are in the recipe?</label>
+      <input type="number" [(ngModel)]="servings" name="servings" class="shadow appearance-none border rounded w-6/12 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+    </div>
+    <!-- Image Upload for Recipe Analysis -->
+    <form (submit)="onSubmit($event)" class="mb-4">
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="fileInput">Upload Recipe Photo:</label>
+        <div class="upload-btn-wrapper">
+          <button type="button" class="btn btn-outline-primary" (click)="fileInput.click()">
+            <i class="bi bi-cloud-arrow-up-fill"></i> Upload
+          </button>
+          <input type="file" id="fileInput" (change)="onFileSelected($event)" required hidden #fileInput/>
+          <span *ngIf="selectedFileName" class="ml-2">{{selectedFileName}}</span> <!-- Display the file name -->
+        </div>
+      </div>
+      
+      <button type="submit"
+          [disabled]="isLoading"
+          [class]="isLoading ? 'bg-gray-500 hover:bg-gray-500 cursor-not-allowed' : 'bg-green-500 hover:bg-green-700'"
+          class="text-white font-bold py-2 px-4 rounded">
+    Analyze Image
+  </button>
+  
+      <div *ngIf="isLoading" class="text-center">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </form>
+    <h4>
+      OR
+    </h4>
+  
+    <!-- Manual Ingredient Addition -->
+    <div>
+      <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Add Ingredients Manually:</h3>
+      <div *ngFor="let ingredient of ingredients; let i = index" class="flex items-center mb-4">
+        <div class="flex flex-col mr-4">
+          <label class="text-gray-700 text-sm font-bold mb-1">Ingredient:</label>
+          <input type="text" [(ngModel)]="ingredient.name" name="ingredientName-{{i}}" placeholder="Ingredient" class="shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <div class="flex flex-col mr-4">
+          <label class="text-gray-700 text-sm font-bold mb-1">Calories:</label>
+          <input type="number" [(ngModel)]="ingredient.calories" name="calories-{{i}}" placeholder="Calories" class="shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <div class="flex flex-col mr-4">
+          <label class="text-gray-700 text-sm font-bold mb-1">Quantity:</label>
+          <input type="text" [(ngModel)]="ingredient.quantity" name="quantity-{{i}}" placeholder="Quantity" class="shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <div class="flex flex-col mr-4">
+          <label class="text-gray-700 text-sm font-bold mb-1">Protein (g):</label>
+          <input type="number" [(ngModel)]="ingredient.protein" name="protein-{{i}}" placeholder="Protein" class="shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <div class="flex flex-col mr-4">
+          <label class="text-gray-700 text-sm font-bold mb-1">Fat (g):</label>
+          <input type="number" [(ngModel)]="ingredient.fat" name="fat-{{i}}" placeholder="Fat" class="shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <div class="flex flex-col">
+          <label class="text-gray-700 text-sm font-bold mb-1">Carbs (g):</label>
+          <input type="number" [(ngModel)]="ingredient.carbs" name="carbs-{{i}}" placeholder="Carbs" class="shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+      </div>
+      <button (click)="addIngredient()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">+ Add Ingredient</button>
+    </div>
+    <button (click)="onSubmitRecipe()" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">Submit Recipe</button>
+    <div *ngIf="isError" class="text-red-500 mt-4">
+      <p>There was an error submitting the recipe. Please try again.</p>
+    </div>
+    <div *ngIf="isSuccess" class="text-green-500 mt-4">
+      <p>Recipe submitted successfully!</p>
+  </div>

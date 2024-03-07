@@ -1,0 +1,25 @@
+<div>
+  <app-consumption-graphs></app-consumption-graphs>
+</div>
+<div class="container mx-auto p-4">
+  <button *ngIf="!showAddRecipe" (click)="showAddRecipe = true" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+    Add Recipe
+  </button>
+  <button *ngIf="showAddRecipe" (click)="showAddRecipe = false" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+    <i class="bi bi-x-lg"></i>
+</button>
+  <app-add-recipe *ngIf="showAddRecipe" (recipeAdded)="onRecipeAdded($event)"></app-add-recipe>
+</div>
+
+<div class="container mx-auto p-4">
+  <!-- Toggle Button -->
+  <button *ngIf="!showRecipes" (click)="showRecipes = true" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+    Select Recipe
+  </button>
+  <button *ngIf="showRecipes" (click)="showRecipes = false" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+    <i class="bi bi-x-lg"></i> <!-- Assuming Bootstrap Icons are used -->
+  </button>
+
+  <!-- Display Recipes Component -->
+  <app-display-recipes *ngIf="showRecipes"></app-display-recipes>
+</div>
