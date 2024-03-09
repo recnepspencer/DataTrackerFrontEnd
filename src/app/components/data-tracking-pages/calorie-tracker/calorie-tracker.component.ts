@@ -39,6 +39,6 @@ export class CalorieTrackerComponent {
 
   onRecipeAdded(event: any): void {
     // Handle the event when a new recipe is added
-    this.loadRecipes(); // Reload recipes to include the newly added one
+    this.loadRecipes(); // Reload recipes to include the newly added one. 
   }
 }
