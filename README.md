@@ -2,6 +2,14 @@
 Read me part 2. 
 </h1>
 
+<h2>
+Github Repositories
+</h2>
+
+* [Front End](https://github.com/recnepspencer/DataTrackerFrontEnd)
+* [OpenAI Service](https://github.com/recnepspencer/python-recipe-decoder)
+* [Backend ](https://github.com/recnepspencer/DataTracker)
+
 # Overview
 
 I'm integrating AI tools into code. It seems like it will be be a very important skill in the near future -- whoever can most creatively use AI to make their work more efficient will take home the biggest piece of cake.
@@ -10,17 +18,35 @@ The data that I am analyzing will be provided by the user. There will be a few d
 
 {Provide a link to your YouTube demonstration.  It should be a 4-5 minute demo of the data set, the questions and answers, the code running and a walkthrough of the code.}
 
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video](https://youtu.be/76rUrwiLI7k)
 
 # Data Analysis Results
 
-{List the questions and the answers you found by doing this analysis.}
+I was able to successfully display the user's data in a graph, which will be useful for helping them manage their personal nutrition. 
 
 # Development Environment
 
-{Describe the tools that you used to develop the software}
+<ul>
+  <li>
+  Vs Code
+  </li>
+  <li>
+    Pytesserect
+  </li>
+  <li>
+    OpenAI API
+  </li>
+  <li>
+  Python
+  </li>
+  <li>
+  Laravel
+  </li>
+  <li>
+  Angular
+  </li>
 
-{Describe the programming language that you used and any libraries.}
+</ul>
 
 # Useful Websites
 
@@ -31,9 +57,9 @@ The data that I am analyzing will be provided by the user. There will be a few d
 # Future Work
 
 {Make a list of things that you need to fix, improve, and add in the future.}
-* Item 1
-* Item 2
-* Item 3
+* Make consumptions, recipes, and meals editable, and consumptions and ingredients deletable
+* I need to make it so the page refreshes when the user makes certain requests
+* I need to fix the time zone issue
 
 <h3>||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</h3>
 <h1>Read Me part 1</h1>
