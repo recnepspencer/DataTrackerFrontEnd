@@ -37,6 +37,11 @@ export class HeaderComponent {
     this.router.navigate(['/login']);
     this.closeMenu()
   }
+
+  navigateToMealTracker(){
+    this.router.navigate(['/track-calories']);
+    this.closeMenu();
+  }
   
 
 

@@ -1,3 +1,42 @@
+<h1>
+Read me part 2. 
+</h1>
+
+# Overview
+
+I'm integrating AI tools into code. It seems like it will be be a very important skill in the near future -- whoever can most creatively use AI to make their work more efficient will take home the biggest piece of cake.
+
+The data that I am analyzing will be provided by the user. There will be a few different sections where the analysis happens. First, in my python program, we connect to the pytesserect library where we convert a photo of a recipe into text. Then it sends that text to the OpenAI API which is formatted to get a JSON response. Then the recipe goes to the front end, where the user is given the option to send it to the back end. Then they can choose to eat different recipes and select the serving amounts, then the backend runs a sql query to return some information to the front end, which uses plotly.js to create a graph of what they've eaten so far. 
+
+{Provide a link to your YouTube demonstration.  It should be a 4-5 minute demo of the data set, the questions and answers, the code running and a walkthrough of the code.}
+
+[Software Demo Video](http://youtube.link.goes.here)
+
+# Data Analysis Results
+
+{List the questions and the answers you found by doing this analysis.}
+
+# Development Environment
+
+{Describe the tools that you used to develop the software}
+
+{Describe the programming language that you used and any libraries.}
+
+# Useful Websites
+
+{Make a list of websites that you found helpful in this project}
+* [Web Site Name](http://url.link.goes.here)
+* [Web Site Name](http://url.link.goes.here)
+
+# Future Work
+
+{Make a list of things that you need to fix, improve, and add in the future.}
+* Item 1
+* Item 2
+* Item 3
+
+<h3>||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</h3>
+<h1>Read Me part 1</h1>
 # Overview
 
 This project is a data tracker application designed to allow users to record and monitor various types of data. The ultimate goal is to incorporate AI for data analysis, making this tool not only useful for tracking but also for generating insights. The project serves as a practical application of data tracking principles with a focus on user interaction and efficient data management.
