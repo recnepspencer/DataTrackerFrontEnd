@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet, Router } from '@angular/router';
 import { SleepSessionComponent } from './cards/sleep-session/sleep-session.component';
-import { SleepTrackingService } from '../services/sleep-tracking.service';
+import { SleepTrackingService } from '../../services/sleep-tracking.service';
 
 @Component({
   selector: 'app-dashboard',

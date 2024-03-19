@@ -20,15 +20,15 @@ export class RegistrationComponent {
   constructor(private authService: AuthService) {}
 
   onSubmit() {
-    this.authService.register(this.registrationData).subscribe(
-      response => {
-        console.log('Login response:', response);
-        // Handle the response here
+    this.authService.register(this.registrationData).subscribe({
+      next: (response) => {
+        console.log('Registration response:', response);
+  
       },
-      error => {
-        console.error('Login error:', error);
+      error: (error) => {
+        console.error('Registration error:', error);
         // Handle the error here
       }
-    );
+    });
   }
 }

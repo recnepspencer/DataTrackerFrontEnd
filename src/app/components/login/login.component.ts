@@ -23,19 +23,24 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit() {
-    this.authService.login(this.loginData).subscribe(
-      response => {
+    this.isLoading = true;
+    this.authService.login(this.loginData).subscribe({
+      next: (response) => {
         console.log('Login response:', response);
-        localStorage.setItem('access_token', response.access_token); // Correct the key based on your previous setup
-        console.log(localStorage.getItem('access_token'));
-        this.router.navigate(['/user-details']); // Redirect to dashboard
-        this.isLoading = false; // Reset loading state
+        localStorage.setItem('access_token', response.access_token);
+        this.router.navigate(['/user-details']);
+        this.isLoading = false;
       },
-      error => {
+      error: (error) => {
         console.error('Login error:', error);
-        this.errorMessage = 'Failed to login'; // Set a user-friendly error message
-        this.isLoading = false; // Reset loading state
+        if (error.status === 401) {
+          this.errorMessage = 'Incorrect username or password, please try again';
+      } else {
+          this.errorMessage = 'Failed to login';
       }
-    );
+        this.isLoading = false;
+      }
+    });
   }
+  
 }
