@@ -53,18 +53,15 @@ describe('AuthService', () => {
 
   // Test for the logout method
   it('should send a logout request and clear local storage', () => {
-    // Set a value in localStorage to test if it's cleared
     localStorage.setItem('token', 'some-token-value');
-    expect(localStorage.getItem('token')).toEqual('some-token-value'); // Verify the token is set
-
+    expect(localStorage.getItem('token')).toEqual('some-token-value');
     service.logout().subscribe();
-
     const req = httpMock.expectOne(`${service.apiUrl}/logout`);
     expect(req.request.method).toBe('POST');
-    req.flush({}); // Simulate a response for the logout request
-
-    expect(localStorage.getItem('token')).toBeNull(); // Check if the token was removed from localStorage
+    req.flush({});
+    expect(localStorage.getItem('token')).toBeNull();
   });
+
 
 });
 

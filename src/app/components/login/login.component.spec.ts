@@ -79,14 +79,19 @@ describe('LoginComponent Execution Logic', () => {
     const loginData = { username: 'wronguser', password: 'wrongpass' };
     component.loginData = loginData;
 
-    jest.spyOn(authService, 'login')
-        .mockReturnValue(throwError(() => ({ error: new Error('Unauthorized'), status: 401 })));
+    jest
+      .spyOn(authService, 'login')
+      .mockReturnValue(
+        throwError(() => ({ error: new Error('Unauthorized'), status: 401 }))
+      );
 
     component.onSubmit();
     tick();
     flush();
 
     expect(authService.login).toHaveBeenCalledWith(loginData);
-    expect(component.errorMessage).toBe('Incorrect username or password, please try again');
-}));
+    expect(component.errorMessage).toBe(
+      'Incorrect username or password, please try again'
+    );
+  }));
 });

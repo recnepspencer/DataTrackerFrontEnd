@@ -21,8 +21,18 @@ export class AuthService {
 
   
   logout(): Observable<any> {
-    localStorage.removeItem('token');
-    return this.http.post<any>(`${this.apiUrl}/logout`, {});
+    return new Observable(observer => {
+      this.http.post<any>(`${this.apiUrl}/logout`, {}).subscribe({
+        next: () => {
+          localStorage.removeItem('token');
+          observer.next();
+          observer.complete();
+        },
+        error: error => {
+          console.error('Logout error:', error);
+          observer.error(error);
+        }
+      });
+    });
   }
-
 }
