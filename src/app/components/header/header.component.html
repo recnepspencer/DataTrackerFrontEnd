@@ -11,11 +11,15 @@
                     <i class="{{menu_icon}}"></i>
                 </div>
                 <div class="desktop_menu" [class.mobile_menu]="menuValue">
-                    <ul>
+                    <ul *ngIf="loggedIn">
                         <li (click)="navigateToDashboard()" routerLink="/dashboard">Dashboard</li>
                         <li (click)="navigateToUserDetails()" routerLink="/user-details">User Details</li>
-                        <li (click)="navigateToMealTracker()" routerLink="/track-calories">Meal Tracker</li> <!-- New item -->
-                        <li (click)="navigateToLogin()" routerLink="/login">Log in</li>
+                        <li (click)="navigateToMealTracker()" routerLink="/track-calories">Meal Tracker</li>
+                        <li  (click)="navigateToLogout()" routerLink="/login">Log Out</li>
+                    </ul>
+                    <ul *ngIf="!loggedIn">
+                        <li (click)="navigateToLogin()" routerLink="/login">Login</li>
+                        <li (click)="navigateToRegister()" routerLink="/register">Register</li>
                     </ul>
                 </div>
             </div>

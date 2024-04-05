@@ -1,48 +1,71 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet, Router } from '@angular/router';
+import { AuthService } from '../../auth/auth.service';
+import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrl: './header.component.css',
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  constructor(private router: Router, private authService: AuthService) {}
+  menuValue: boolean = false;
+  menu_icon: string = 'bi bi-list';
+  loggedIn: boolean = false;
 
-  constructor(private router: Router) { 
+  ngOnInit(): void {
+    this.authService.loggedIn.subscribe((value) => {
+      this.loggedIn = value;
+      console.log('Logged in:', this.loggedIn);
+    });
   }
 
- menuValue:boolean=false;
- menu_icon :string ='bi bi-list';
- openMenu(){
-    this.menuValue =! this.menuValue ;
+  openMenu() {
+    this.menuValue = !this.menuValue;
     this.menu_icon = this.menuValue ? 'bi bi-x' : 'bi bi-list';
   }
-   closeMenu() {
+  closeMenu() {
     this.menuValue = false;
     this.menu_icon = 'bi bi-list';
   }
 
-  navigateToDashboard(){
+  navigateToDashboard() {
     this.router.navigate(['/dashboard']);
-    this.closeMenu()
+    this.closeMenu();
   }
 
-  navigateToUserDetails(){
+  navigateToUserDetails() {
     this.router.navigate(['/user-details']);
-    this.closeMenu()
+    this.closeMenu();
   }
 
-  navigateToLogin(){
+  navigateToLogin() {
     this.router.navigate(['/login']);
-    this.closeMenu()
+    this.closeMenu();
   }
 
-  navigateToMealTracker(){
+  navigateToMealTracker() {
     this.router.navigate(['/track-calories']);
     this.closeMenu();
   }
-  
 
+  navigateToLogout() {
+    this.authService.logout().subscribe({
+      next: () => {
+        this.router.navigate(['/login']);
+      },
+      error: (error) => {
+        console.error('Logout error:', error);
+      },
+    });
+    this.closeMenu();
+  }
 
+  navigateToRegister() {
+    this.router.navigate(['/register']);
+    this.closeMenu();
+  }
 }

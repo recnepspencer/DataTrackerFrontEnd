@@ -27,7 +27,6 @@ export class LoginComponent {
     this.authService.login(this.loginData).subscribe({
       next: (response) => {
         console.log('Login response:', response);
-        localStorage.setItem('access_token', response.access_token);
         this.router.navigate(['/user-details']);
         this.isLoading = false;
       },
