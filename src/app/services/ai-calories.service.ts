@@ -6,11 +6,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AiCaloriesService {
 
-  private apiUrl = 'http://localhost:5000/convert';
+  private aiApi = 'http://127.0.0.1:5000/convert';
 
   constructor(private http: HttpClient) { }
 
   public analyzeImage(formData: FormData) {
-    return this.http.post(this.apiUrl, formData, { responseType: 'text' });
+    return this.http.post(this.aiApi, formData, { responseType: 'text' });
   }
 }

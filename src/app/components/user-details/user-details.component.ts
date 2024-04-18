@@ -6,6 +6,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 RouterLink
 import { UserService } from '../../services/user.service';
 import { UpdateWeightComponent } from './update-weight/update-weight.component';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-dashboard',

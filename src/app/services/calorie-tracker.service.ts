@@ -84,4 +84,6 @@ export class CalorieTrackerService {
   getTotalMacrosLast7Days(): Observable<any> {
     return this.http.get(`${this.apiUrl}/macros`);
   }
+
+
 }
