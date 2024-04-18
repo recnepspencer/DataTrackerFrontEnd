@@ -10,19 +10,24 @@
                 <div class="menu-icon" (click)="openMenu()">
                     <i class="{{menu_icon}}"></i>
                 </div>
+
                 <div class="desktop_menu" [class.mobile_menu]="menuValue">
-                    <ul *ngIf="loggedIn">
-                        <li (click)="navigateToDashboard()" routerLink="/dashboard">Dashboard</li>
-                        <li (click)="navigateToUserDetails()" routerLink="/user-details">User Details</li>
-                        <li (click)="navigateToMealTracker()" routerLink="/track-calories">Meal Tracker</li>
-                        <li  (click)="navigateToLogout()" routerLink="/login">Log Out</li>
+                  @if(loggedIn) {
+                    <ul>
+                      <li (click)="navigateToDashboard()" routerLink="/dashboard">Dashboard</li>
+                      <li (click)="navigateToUserDetails()" routerLink="/user-details">User Details</li>
+                      <li (click)="navigateToMealTracker()" routerLink="/track-calories">Meal Tracker</li>
+                      <li  (click)="navigateToLogout()" routerLink="/login">Log Out</li>
                     </ul>
-                    <ul *ngIf="!loggedIn">
-                        <li (click)="navigateToLogin()" routerLink="/login">Login</li>
-                        <li (click)="navigateToRegister()" routerLink="/register">Register</li>
+                  } @else if(!loggedIn) {
+                    <ul >
+                      <li (click)="navigateToLogin()" routerLink="/login">Login</li>
+                      <li (click)="navigateToRegister()" routerLink="/register">Register</li>
                     </ul>
+                  }
                 </div>
             </div>
         </div>
     </div>
+    <button (click)="showLogin()">LoggedIn</button>
 </header>

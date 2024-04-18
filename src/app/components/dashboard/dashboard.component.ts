@@ -16,14 +16,13 @@ export class DashboardComponent {
 
   trackSleepSubmit() {
     this.router.navigate(['/track/sleep']);
-
   }
 
   handleSessionStarted(startTime: Date): void {
     console.log('Sleep session started at:', startTime);
     // Process the start time as needed
   }
-  
+
   handleSessionEnded(sessionData: { startTime: Date, endTime: Date; quality: number }): void {
     console.log('Sleep session data: ', sessionData);
     this.sleepTrackingService.reportSleep(sessionData).subscribe({

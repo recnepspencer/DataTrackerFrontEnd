@@ -23,23 +23,30 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit() {
+    this.login();
+  }
+
+  login() {
     this.isLoading = true;
     this.authService.login(this.loginData).subscribe({
-      next: (response) => {
-        console.log('Login response:', response);
-        this.router.navigate(['/user-details']);
-        this.isLoading = false;
-      },
-      error: (error) => {
-        console.error('Login error:', error);
-        if (error.status === 401) {
-          this.errorMessage = 'Incorrect username or password, please try again';
-      } else {
-          this.errorMessage = 'Failed to login';
-      }
-        this.isLoading = false;
-      }
+      next: (response) => this.loginNext(response),
+      error: (error) => this.loginError(error)
     });
   }
-  
+
+  loginNext(response: any) {
+    this.router.navigate(['/user-details']);
+    this.isLoading = false;
+  }
+
+  loginError(error: any) {
+    console.error('Login error:', error);
+    if (error.status === 401) {
+      this.errorMessage = 'Incorrect username or password, please try again';
+    } else {
+      this.errorMessage = 'Failed to login';
+    }
+    this.isLoading = false;
+  }
+
 }

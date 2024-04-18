@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet, Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
 import { CommonModule } from '@angular/common';
+import { AuthGuard } from '../../auth/auth.guard';
 
 @Component({
   selector: 'app-header',
@@ -11,15 +12,20 @@ import { CommonModule } from '@angular/common';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent implements OnInit {
-  constructor(private router: Router, private authService: AuthService) {}
   menuValue: boolean = false;
   menu_icon: string = 'bi bi-list';
   loggedIn: boolean = false;
 
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {}
+
   ngOnInit(): void {
-    this.authService.loggedIn.subscribe((value) => {
-      this.loggedIn = value;
-      console.log('Logged in:', this.loggedIn);
+    console.log('Header component initialized');
+    this.authService.userLoggedIn$.subscribe((loggedIn) => {
+      this.loggedIn = loggedIn;
+      console.log('User logged in:', loggedIn);
     });
   }
 
@@ -67,5 +73,11 @@ export class HeaderComponent implements OnInit {
   navigateToRegister() {
     this.router.navigate(['/register']);
     this.closeMenu();
+  }
+
+  showLogin() {
+    console.log(this.authService.userLoggedIn.value);
+    this.authService.userLoggedIn.next(true);
+    console.log(this.authService.userLoggedIn.value);
   }
 }

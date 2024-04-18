@@ -6,6 +6,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 RouterLink
 import { UserService } from '../../services/user.service';
 import { UpdateWeightComponent } from './update-weight/update-weight.component';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +20,7 @@ export class UserDetailsComponent implements OnInit {
   user: any = {};
   showUpdateWeight = false;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.userService.getUserDetails().subscribe(
@@ -31,6 +32,7 @@ export class UserDetailsComponent implements OnInit {
         console.error('Failed to fetch user details', error);
       }
     );
+    // this.authService.userLoggedIn.next(true);
   }
 
   submitWeight(): void {
