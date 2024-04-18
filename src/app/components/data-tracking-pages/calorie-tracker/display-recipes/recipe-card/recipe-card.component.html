@@ -1,29 +1,55 @@
 <div class="card my-2">
-  <div class="card-body position-relative">
-    <!-- Trash Can Icon -->
-    <button class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2" (click)="deleteRecipe(recipe.id)">
-      <i class="bi bi-trash"></i>
-    </button>
-    <!-- Recipe Content -->
+  <div class="card-body">
+    <div class="position-absolute top-0 end-0 m-2" style="right: 0">
+      <!-- Toggle edit/view mode -->
+      <button class="btn btn-primary btn-sm me-4" (click)="toggleEdit()">
+        <i class="bi bi-pencil"></i>
+      </button>
+      <!-- Delete button -->
+      <button class="btn btn-danger btn-sm" (click)="deleteRecipe(recipe.id)">
+        <i class="bi bi-trash"></i>
+      </button>
+    </div>
+
     <h5 class="card-title">{{ recipe.recipe }}</h5>
-    <p class="card-text">Calories: {{ recipe.calories }}</p>
-    <p class="card-text">Servings: {{ recipe.servings }}</p>
+    <p class="card-text">Calories per serving: {{ recipe.calories }}</p>
+    <!-- Always include the edit component, but pass isEditing to control view -->
+    <app-edit-recipe [recipe]="recipe" [isEditing]="isEditing"></app-edit-recipe>
   </div>
-  <button type="button" class="btn btn-primary" (click)="openServingsModal()">Eat This</button>
+  <div class="d-flex justify-content-center m-4">
+    <button type="button" class="btn btn-primary" (click)="openServingsModal()">Eat This</button>
+  </div>
 </div>
-<div class="modal fade" id="servingsModal{{recipe.id}}" tabindex="-1" aria-labelledby="servingsModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="servingsModal{{ recipe.id }}"
+  tabindex="-1"
+  aria-labelledby="servingsModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="servingsModalLabel">How many servings will you eat?</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="servingsModalLabel">
+          How many servings will you eat?
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
-        <input type="number" class="form-control" [(ngModel)]="servings" name="servings" placeholder="Number of servings">
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="servings"
+          name="servings"
+          placeholder="Number of servings"
+        />
       </div>
-      <div class="modal-body">
-        Please type how many servings you will eat.
-      </div>
+      <div class="modal-body">Please type how many servings you will eat.</div>
       <div *ngIf="showSuccessMessage" class="alert alert-success" role="alert">
         Consumption submitted successfully.
       </div>
@@ -31,10 +57,17 @@
         There was an error submitting your consumption.
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
-        <button type="button" class="btn btn-primary" (click)="confirmServings()">Confirm</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Back
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="confirmServings()"
+        >
+          Confirm
+        </button>
       </div>
-  
     </div>
   </div>
 </div>
